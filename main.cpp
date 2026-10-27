@@ -5,6 +5,8 @@
 //first step is ppm image formating
 // stores rgb color image
 
+#include "color.h"
+#include "vec3.h"
 #include <iostream>
 #include<string>
 using namespace std;
@@ -24,18 +26,8 @@ int main() {
         clog << "\rScranlines remaining: " << (image_height - j) << ' ' << flush;
         //this is a progress indicator. i have no idea what clog and flush are :D
         for (int i = 0; i < image_width; i++) {
-            auto r = double(i) / (image_width-1);
-            auto g = double(j) / (image_height-1);
-            auto b = 0.0; // ??? whys blue always zero A: just for the example
-            //this gives a value between 0.0 (off) to 1.0 (fully on)
-
-            int ir = int(255.999 * r);
-            int ig = int(255.999 * g);
-            int ib = int(255.999 * b);
-            //adjusted to rgb channel values aka 0 to 255
-
-            cout << ir << ' ' << ig << ' ' << ib << '\n';
-            // ??? why not just say endl;? A: less bytes
+            auto pixel_color = color(double(i)/(image_width-1), double(j)/(image_height-1), 0);
+            write_color(std::cout, pixel_color);
 
         }
     }
